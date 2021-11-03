@@ -1,4 +1,4 @@
-## IOT Lab 3: Infrastructure Networking
+## IOT Lab 4: IoT Cloud
 
 | Author           | Email                   |
 |------------------|-------------------------|
