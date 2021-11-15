@@ -13,9 +13,11 @@ from threading import Lock
 device_st = 0
 device_end = 300
 
+# More info: https://piazza.com/class/ksj11m6lmec5my?cid=355
 #Path to the dataset, modify this
 data_path = "data/vehicle0.csv"
 
+# More info: https://piazza.com/class/ksj11m6lmec5my?cid=360
 #Path to your certificates, modify this
 certificate_formatter = "./certificates/device_{}/device_{}.certificate.pem"
 key_formatter = "./certificates/device_{}/device_{}.private.pem"
