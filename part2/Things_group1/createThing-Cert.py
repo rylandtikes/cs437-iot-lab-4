@@ -2,7 +2,7 @@
 
 ################################################### Connecting to AWS
 import boto3
-
+import os
 import json
 ################################################### Create random name for things
 import random
@@ -45,11 +45,11 @@ def createCertificate():
 			elif element == 'certificateId':
 					certificateId = data['certificateId']
 							
-	with open('public.key', 'w') as outfile:
+	with open(os.path.join('certificates', '') + thingName + 'public.key', 'w') as outfile:
 			outfile.write(PublicKey)
-	with open('private.key', 'w') as outfile:
+	with open(os.path.join('certificates', '') + thingName + 'private.key', 'w') as outfile:
 			outfile.write(PrivateKey)
-	with open('cert.pem', 'w') as outfile:
+	with open(os.path.join('certificates', '') + thingName + 'cert.pem', 'w') as outfile:
 			outfile.write(certificatePem)
 
 	response = thingClient.attach_policy(
@@ -60,6 +60,15 @@ def createCertificate():
 			thingName = thingName,
 			principal = certificateArn
 	)
+	response = thingClient.add_thing_to_thing_group(
+		    thingGroupName='Things_group1',
+			thingGroupArn='arn:aws:iot:us-west-2:646855605562:thinggroup/Things_group1',
+			thingName=thingName,
+			thingArn=thingArn
+	)
 
 thingClient = boto3.client('iot')
-createThing()
+
+# TODO: troubleshoot this because we will have to create ~300 things
+for i in range(5):
+	createThing()
