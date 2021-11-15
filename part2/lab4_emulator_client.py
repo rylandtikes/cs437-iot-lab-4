@@ -14,7 +14,7 @@ device_st = 0
 device_end = 300
 
 #Path to the dataset, modify this
-data_path = "data/class_{}.csv"
+data_path = "data/vehicle0.csv"
 
 #Path to your certificates, modify this
 certificate_formatter = "./certificates/device_{}/device_{}.certificate.pem"
