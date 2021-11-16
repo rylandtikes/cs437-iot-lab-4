@@ -11,11 +11,10 @@ import string
 ################################################### Parameters for Thing
 thingArn = ''
 thingId = ''
-thingName = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(15)])
 defaultPolicyName = 'Thing1_Policy'
 ###################################################
 
-def createThing():
+def createThing(thingName):
   global thingClient
   thingResponse = thingClient.create_thing(
       thingName = thingName
@@ -26,9 +25,9 @@ def createThing():
         thingArn = data['thingArn']
     elif element == 'thingId':
         thingId = data['thingId']
-    createCertificate()
+    createCertificate(thingName)
 
-def createCertificate():
+def createCertificate(thingName):
 	global thingClient
 	certResponse = thingClient.create_keys_and_certificate(
 			setAsActive = True
@@ -67,8 +66,14 @@ def createCertificate():
 			thingArn=thingArn
 	)
 
+
+
 thingClient = boto3.client('iot')
 
-# TODO: troubleshoot this because we will have to create ~300 things
-for i in range(5):
-	createThing()
+def main(): 
+	for i in range(5):
+		thingName = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(15)])
+		createThing(thingName)
+
+if __name__ == '__main__':
+	main()
