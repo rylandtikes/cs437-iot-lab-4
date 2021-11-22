@@ -71,7 +71,7 @@ def createCertificate(thingName):
 thingClient = boto3.client('iot')
 
 def main(): 
-	for i in range(5):
+	for i in range(10):
 		thingName = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(15)])
 		createThing(thingName)
 
